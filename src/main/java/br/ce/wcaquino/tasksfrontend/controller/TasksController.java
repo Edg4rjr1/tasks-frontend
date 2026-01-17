@@ -27,9 +27,9 @@ public class TasksController {
 	private String VERSION;
 	
 	public String getBackendURL() {
-		return "http://" + BACKEND_HOST + ":" + BACKEND_PORT;
-	}
-	
+    // Adicionamos o contexto /tasks-backend aqui para valer para todos
+    return "http://" + BACKEND_HOST + ":" + BACKEND_PORT + "/tasks-backend";
+}
 	@GetMapping("")
 	public String index(Model model) {
 		model.addAttribute("todos", getTodos());
