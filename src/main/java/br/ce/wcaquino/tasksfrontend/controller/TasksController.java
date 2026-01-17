@@ -27,8 +27,8 @@ public class TasksController {
 	private String VERSION;
 	
 	public String getBackendURL() {
-    // Adicionamos o contexto /tasks-backend aqui para valer para todos
-    return "http://" + BACKEND_HOST + ":" + BACKEND_PORT + "/tasks-backend";
+    // Se no navegador funciona com /tasks/, aqui tem que ser igual
+    return "http://" + BACKEND_HOST + ":" + BACKEND_PORT + "/tasks";
 }
 	@GetMapping("")
 	public String index(Model model) {
@@ -76,8 +76,8 @@ public class TasksController {
 	
 	@SuppressWarnings("unchecked")
 	private List<Todo> getTodos() {
-		RestTemplate restTemplate = new RestTemplate();
-		return restTemplate.getForObject(
-				getBackendURL() + "/tasks-backend/todo", List.class);
-	}
+    RestTemplate restTemplate = new RestTemplate();
+    // Agora o getBackendURL() já traz o "/tasks", então só somamos o "/todo"
+    return restTemplate.getForObject(getBackendURL() + "/todo", List.class);
+}
 }
